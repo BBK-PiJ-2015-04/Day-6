@@ -44,87 +44,63 @@ and prints the matrix on the screen.
 
 */
 
-Matrix myOwnMatrix = new Matrix(8, 9);
-
-myOwnMatrix.prettyPrint();
-
-myOwnMatrix.setElement(8, 8, -5);
-
-myOwnMatrix.prettyPrint();
-
-print("Please enter a row of numbers: ");
+println();
+println();
+println();
+println("Please enter the desired size of the Matrix:");
+print("Number of rows: ");
 String str = System.console().readLine();
+int rows = Integer.parseInt(str);
+print("Number of columns: ");
+str = System.console().readLine();
+int columns = Integer.parseInt(str);
 
-println(rowValid(str));
+Matrix myOwnMatrix = new Matrix(rows, columns);
 
-String[] test;
+myOwnMatrix.prettyPrint();
 
-test = rowToNumbers(str);
-
-
-
-
-boolean rowValid(String str) {
-	if(str.charAt(0) < 48 || str.charAt(0) > 57) {
-		return false; // If the first character is not a number then fail!
-	}
-	// Next let's check all the other characters are numbers or commas
-	for(int i = 0; i < str.length(); i++) {
-		if(!((str.charAt(i) > 47 && str.charAt(i) < 58) || str.charAt(i) == ',')) {
-			return false;
-		}
-	}
-	// Now let's check that the last character is not a comma
-	if(str.charAt(str.length() - 1) == ',') {
-		return false;
-	}
-	return true;
-}
-
-String[] rowToNumbers(String str) {
-	int numberCounter = 1;
-	for(int i = 0; i < (str.length() - 1); i++) {
-		if(str.charAt(i) == ',') {
-			numberCounter++;
-			println("Hello");
-		}
-	}
-	println(numberCounter);
-	String[] numbers;
-	numbers = new String[numberCounter];
-	int commaPosition = 0;
-	int commaCounter = 0;
-	for(int i = 0; i < (str.length() - 1); i++) {
-		if(str.charAt(i) == ',') {
-			println(str);
-			println(i);
-			println(commaCounter);
-			println(str.substring(commaPosition, i));
-			numbers[commaCounter] = str.substring(commaPosition, i);
-			commaCounter++;
-			commaPosition = i + 1;
-		}
-	println(str.substring(commaPosition, i + 2));
-	numbers[commaCounter] = str.substring(commaPosition, i + 2);
-	}
-	println();
-	println();
-	
-	
-	for (int i = 0; i <= commaCounter; i++) {
-		println (numbers[i]);
-		println(commaCounter);
-		}
-	
-	
-	return numbers;
-}
-	
+println("How about changing an element?");
+print("Enter the row number: ");
+str = System.console().readLine();
+int x = Integer.parseInt(str);
+print("Enter the column number: ");
+str = System.console().readLine();
+int y = Integer.parseInt(str);
+print("Enter the value: ");
+str = System.console().readLine();
+int z = Integer.parseInt(str);
 
 
+myOwnMatrix.setElement(x, y, z);
+
+myOwnMatrix.prettyPrint();
+
+println("Now how about changing a whole row?");
+print("Enter the row number: ");
+str = System.console().readLine();
+int row = Integer.parseInt(str);
+print("Enter the row: ");
+str = System.console().readLine();
+
+myOwnMatrix.setRow(row, str);
+
+myOwnMatrix.prettyPrint();
+
+println("Now how about changing a whole column?");
+print("Enter the column number: ");
+str = System.console().readLine();
+int column = Integer.parseInt(str);
+print("Enter the column: ");
+str = System.console().readLine();
+
+myOwnMatrix.setColumn(column, str);
+
+myOwnMatrix.prettyPrint();
 
 class Matrix {
+	
 	int[][] mat;
+	
 	Matrix(int x, int y) {
 		mat = new int[x][y];
 		for (int i = 0; i < x; i++) {
@@ -133,6 +109,7 @@ class Matrix {
 			}
 		}
 	}
+	
 	void setElement(int x, int y, int z) {
 		int width = mat.length;
 		int height = mat[0].length;
@@ -140,28 +117,36 @@ class Matrix {
 			mat[x - 1][y - 1] = z;
 		}
 	}
-	/*void setRow(int x, String str) {
+	
+	void setRow(int x, String str) {
 		int width = mat.length;
 		int height = mat[0].length;
-		for (int i = 0; i < str.length(); i = i + 2) {
-			if ((str.charAt(i) > 47 && str.charAt(i) < 58)
-				&& str.charAt(i + 1) == ',') {
-					for (j = 0; j <)
-				
+		if (x <= height && rowValid(str) == true) {
+			int row[] = rowToNumbers(str);
+			if (row.length == width) {
+				for (int i = 0; i < row.length; i++) {
+					mat[x - 1][i] = row[i];
 				}
-		
-		
+			}
 		}
-		
-	*/
+	}
 	
+	void setColumn(int x, String str) {
+		int width = mat.length;
+		int height = mat[0].length;
+		if (x <= width && rowValid(str) == true) {
+			int row[] = rowToNumbers(str);
+			if (row.length == height) {
+				for (int i = 0; i < row.length; i++) {
+					mat[i][x - 1] = row[i];
+				}
+			}
+		}
+	}
 	
-	
-
-
-
-
 	void prettyPrint() {
+		println();
+		println("Here is your Matrix:");
 		println();
 		int width = mat.length;
 		int height = mat[0].length;
@@ -180,5 +165,48 @@ class Matrix {
 		}
 		println();
 	}
-}
+	
+	boolean rowValid(String str) {
+		if(str.charAt(0) < 48 || str.charAt(0) > 57) {
+			return false; // If the first character is not a number then fail!
+		}
+		// Next let's check all the other characters are numbers or commas
+		for(int i = 0; i < str.length(); i++) {
+			if(!((str.charAt(i) > 47 && str.charAt(i) < 58) || str.charAt(i) == ',')) {
+				return false;
+			}
+		}
+		// Now let's check that the last character is not a comma
+		if(str.charAt(str.length() - 1) == ',') {
+			return false;
+		}
+		return true;
+	}
 
+	int[] rowToNumbers(String str) {
+		int numberCounter = 1;
+		for(int i = 0; i < (str.length() - 1); i++) {
+			if(str.charAt(i) == ',') {
+				numberCounter++;
+			}
+		}
+		String[] numbers;
+		numbers = new String[numberCounter];
+		int commaPosition = 0;
+		int commaCounter = 0;
+		for(int i = 0; i < (str.length() - 1); i++) {
+			if(str.charAt(i) == ',') {
+				numbers[commaCounter] = str.substring(commaPosition, i);
+				commaCounter++;
+				commaPosition = i + 1;
+			}
+			numbers[commaCounter] = str.substring(commaPosition, i + 2);
+		}	
+		int[] numbs;
+		numbs = new int[commaCounter + 1];
+		for (int i = 0; i <= commaCounter; i++) {
+			numbs[i] = Integer.parseInt(numbers[i]);
+		}	
+	return numbs;
+	}
+}
