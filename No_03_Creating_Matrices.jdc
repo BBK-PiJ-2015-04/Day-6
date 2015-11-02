@@ -111,16 +111,16 @@ class Matrix {
 	}
 	
 	void setElement(int x, int y, int z) {
-		int width = mat.length;
-		int height = mat[0].length;
-		if(x <= width && y <= height) {
+		int height = mat.length;
+		int width = mat[0].length;
+		if(x <= height && y <= width) {
 			mat[x - 1][y - 1] = z;
 		}
 	}
 	
 	void setRow(int x, String str) {
-		int width = mat.length;
-		int height = mat[0].length;
+		int height = mat.length;
+		int width = mat[0].length;
 		if (x <= height && rowValid(str) == true) {
 			int row[] = rowToNumbers(str);
 			if (row.length == width) {
@@ -131,14 +131,14 @@ class Matrix {
 		}
 	}
 	
-	void setColumn(int x, String str) {
-		int width = mat.length;
-		int height = mat[0].length;
-		if (x <= width && rowValid(str) == true) {
+	void setColumn(int y, String str) {
+		int height = mat.length;
+		int width = mat[0].length;
+		if (y <= width && rowValid(str) == true) {
 			int row[] = rowToNumbers(str);
 			if (row.length == height) {
 				for (int i = 0; i < row.length; i++) {
-					mat[i][x - 1] = row[i];
+					mat[i][y - 1] = row[i];
 				}
 			}
 		}
