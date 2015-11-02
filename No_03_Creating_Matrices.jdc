@@ -170,8 +170,7 @@ class Matrix {
 				}
 			}
 		}
-	matty = matty.substring(0, matty.length() - 1);
-	matty = matty + "]";
+	matty = matty.substring(0, matty.length() - 1) + "]";
 	return matty;
 	}
 	
