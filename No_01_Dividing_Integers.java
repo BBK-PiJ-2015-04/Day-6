@@ -17,7 +17,7 @@ Calculator.
 
 */
 
-public class No_01_Dividing_Integers{
+public class No_01_Dividing_Integers {
 
 	public static void main(String[] BirkbeckRulez) {
 
