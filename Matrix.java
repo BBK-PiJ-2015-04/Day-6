@@ -125,6 +125,7 @@ public class Matrix {
 		for (int i = 0; i <= commaCounter; i++) {
 			numbs[i] = Integer.parseInt(numbers[i]);
 		}	
-	return numbs;
+		return numbs;
 	}
+
 }

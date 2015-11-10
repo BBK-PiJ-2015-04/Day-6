@@ -21,4 +21,5 @@ public class Calculator {
 	public void modulus(int x, int y) {
 		System.out.println(x + " modulus " + y + " is " + (x % y));
 	}
+
 }
